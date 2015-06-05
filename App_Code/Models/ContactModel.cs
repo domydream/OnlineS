@@ -63,9 +63,8 @@ public class ContactModel
     public void InsertContact(Contact Contact)
     {
         Dictionary<String, Object> map = new Dictionary<String, Object>();
-        map.Add("contactID", Contact.ContactID);
-        map.Add("userID", Contact.UserID);
-        map.Add("friendID", Contact.FriendID);
+     
+        map.Add("userID", Contact.UserID);      
         map.Add("friendName", Contact.FriendName);
         map.Add("FriendNumber", Contact.FriendNumber);
         map.Add("status", Contact.Status);

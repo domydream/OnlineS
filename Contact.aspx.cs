@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Contact : System.Web.UI.Page
+public partial class ContactList : System.Web.UI.Page
 {
     ContactModel cm = new ContactModel();
     protected void Page_Load(object sender, EventArgs e)
@@ -23,9 +23,20 @@ public partial class Contact : System.Web.UI.Page
                 Session["user"] = new UserModel().getByUserName(Request.Cookies["user"].Value);
             }
             ((MyMasterPage)Master).u = (User)Session["user"];
-            UserProfile up = new UserProfileModel().getByUserID(((User)Session["user"]).UserID.ToString());
-            Response.Write(up.ProfileID);
+
+            myID.Text = ((User)Session["user"]).UserID.ToString();
+
         }
 
+    }
+    protected void submit_Click(object sender, EventArgs e)
+    {
+        Contact ct = new Contact();
+        ct.FriendName = name.Text;
+        ct.FriendNumber = number.Text;
+        ct.UserID =int.Parse( myID.Text);
+        ct.Status = 1;
+        new ContactModel().InsertContact(ct);
+        Response.Redirect(Request.RawUrl);
     }
 }
