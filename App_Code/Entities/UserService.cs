@@ -11,8 +11,8 @@ namespace OnlineSMS.App_Code.Entities
         public int ServiceID { get; set; }
         public int Quantity { get; set; }
         public int State { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
+        public string StartDate { get; set; }
+        public string ExpirationDate { get; set; }
     }
 
     

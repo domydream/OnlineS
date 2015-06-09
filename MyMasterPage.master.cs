@@ -45,5 +45,7 @@ public partial class MyMasterPage : System.Web.UI.MasterPage
         content.Text = "";
         Response.Redirect(Request.RawUrl);
     }
- 
+
+   
+
 }

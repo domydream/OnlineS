@@ -16,7 +16,7 @@
     <link href="Assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-   
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -29,7 +29,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="Home.aspx"><i class="fa fa-send"></i> OnlineSMS</a>
+                    <a class="navbar-brand" href="Home.aspx"><i class="fa fa-send"></i> OnlineSMS</a>                    
                 </div>
                 <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
                     Last login :
@@ -37,14 +37,15 @@
                     &nbsp;
                     <asp:Button ID="btnLogout" class="btn btn-danger square-btn-adjust" runat="server" Text="Logout" OnClick="btnLogout_Click"></asp:Button>
                 </div>
+
+
+
+                <!-- /. NAV TOP  -->
             </nav>
-            <!-- /. NAV TOP  -->
             <nav class="navbar-default navbar-side" role="navigation">
                 <div class="sidebar-collapse">
                     <ul class="nav" id="main-menu">
                         <li class="text-center <% if (active.Equals("profile")) Response.Write("active-menu"); %>">
-
-
                             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/MyProfile.aspx">
                                 <asp:Image ID="avatar" CssClass="user-image img-responsive" runat="server" />
                                 <i class="fa fa-pencil"></i>
@@ -80,7 +81,8 @@
             </nav>
             <!-- /. NAV SIDE  -->
             <div id="page-wrapper">
-                <a id="sms" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-send"></i>Send SMS</a>
+                <a id="sms" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-send"></i> Send SMS</a>
+             
                 <div class=" text-center">
                     <asp:Label runat="server" ID="info" CssClass="label-success"></asp:Label>
                 </div>
@@ -120,15 +122,19 @@
     <!-- JQUERY SCRIPTS -->
     <script src="Assets/js/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP SCRIPTS -->
+     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"s></script>
     <script src="Assets/js/bootstrap.min.js"></script>
     <!-- CUSTOM SCRIPTS -->
-    <script src="Assets/js/jquery.metisMenu.js"></script>   
+    <script src="Assets/js/jquery.metisMenu.js"></script>
     <script src="Assets/js/custom.js"></script>
-    <script src="Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#txtDOB').datepicker();
-        });
+    
+               <script>
+                   $(document).ready(function () {
+                       //$('#TextBox2').datepicker();
+                       //$('#TextBox3').datepicker();
+                       $('#txtStartDate').datepicker();
+                      // $('#txtExpirationDate').datepicker();
+                   });
     </script>
 </body>
 </html>

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Services : System.Web.UI.Page
+public partial class ServicesControl : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -21,19 +21,17 @@ public partial class Services : System.Web.UI.Page
                 Session["user"] = new UserModel().getByUserName(Request.Cookies["user"].Value);
             }
             ((MyMasterPage)Master).u = (User)Session["user"];
-           
+
         }
     }
-    protected void submit_Click(object sender, EventArgs e)
+    protected void create_Click(object sender, EventArgs e)
     {
-        if (new UserModel().Login(uname.Text, pass.Text) ) { 
-            if( uname.Text.Equals("panda")){
-                Response.Redirect("~/ServicesControl.aspx");
-            }
-            else
-            {
-                Response.Redirect("~/MyService.aspx");
-            }
-        }
+        Service s = new Service();
+        s.Name = txtName.Text;
+        s.Contents = txtContent.Text;
+        s.Price = float.Parse(txtprice.Text);
+        s.State =int.Parse(txtState.SelectedValue);
+        new ServicesModel().InsertServices(s);
+        Response.Redirect(Request.RawUrl);
     }
 }

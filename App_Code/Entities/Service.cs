@@ -6,9 +6,9 @@ using System.Web;
 /// <summary>
 /// Summary description for Services
 /// </summary>
-public class Services
+public class Service
 {
-	public Services()
+	public Service()
 	{
 		
 	}

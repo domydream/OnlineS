@@ -59,11 +59,10 @@ public class ServicesModel
      
     }
 
-    public void InsertServices(Services Services)
+    public void InsertServices(Service Services)
     {
        
-        Dictionary<String, Object> map = new Dictionary<String, Object>();
-     
+        Dictionary<String, Object> map = new Dictionary<String, Object>();     
         map.Add("Name", Services.Name);
         map.Add("contents", Services.Contents);
         map.Add("price", Services.Price);
@@ -71,7 +70,7 @@ public class ServicesModel
         this.connect.Insert("Services", map);
     }
 
-    public void UpdateServices(Services Services)
+    public void UpdateServices(Service Services)
     {
         Dictionary<String, Object> condition = new Dictionary<String, Object>();
         condition.Add("ServicesID",Services.ServiceID );
@@ -84,7 +83,7 @@ public class ServicesModel
         this.connect.Update("Services", map, condition); 
     }
 
-    public void DeleteServices(Services Services) {
+    public void DeleteServices(Service Services) {
         Dictionary<String, Object> condition = new Dictionary<String, Object>();
         condition.Add("ServicesID", Services.ServiceID);
         this.connect.Delete("Services", condition);

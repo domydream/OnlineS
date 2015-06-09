@@ -19,7 +19,18 @@
         <Columns>
             <asp:BoundField DataField="FriendName" HeaderText="FriendName" SortExpression="FriendName" />
             <asp:BoundField DataField="FriendNumber" HeaderText="FriendNumber" SortExpression="FriendNumber" />
-            <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+         
+            <asp:TemplateField ShowHeader="False">
+                <EditItemTemplate>
+                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" ><i class="fa fa-save"></i> Update</asp:LinkButton>
+                    &nbsp;  &nbsp;  &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" ><i class="fa fa-reply"></i> Cancel</asp:LinkButton>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit"><i class="fa fa-edit"></i> Edit</asp:LinkButton>
+                    &nbsp;  &nbsp;  &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" OnClientClick="return confirm('Are you sure remove this contact')" CausesValidation="False" CommandName="Delete" ><i class="fa fa-trash"></i> Delete</asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
+         
         </Columns>
     </asp:GridView>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineSMSConnectionString %>" DeleteCommand="DELETE FROM [Contact] WHERE [ContactID] = @ContactID" InsertCommand="INSERT INTO [Contact] ([userID], [FriendName], [FriendNumber], [Status]) VALUES (@userID, @FriendName, @FriendNumber, @Status)" SelectCommand="SELECT * FROM [Contact] WHERE ([userID] = @userID)" UpdateCommand="UPDATE [Contact] SET  [FriendName] = @FriendName, [FriendNumber] = @FriendNumber WHERE [ContactID] = @ContactID">

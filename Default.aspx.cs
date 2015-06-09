@@ -41,7 +41,7 @@ public partial class _Default : System.Web.UI.Page
                 UserProfile up = new UserProfile();
                 up.UserID = ((User)Session["user"]).UserID;                
                 new UserProfileModel().InsertUserProfile(up);
-                Response.Redirect("~/MyProfile.aspx#setting");      
+                Response.Redirect("~/MyProfile.aspx");      
             }
             if (result == RecaptchaVerificationResult.IncorrectCaptchaSolution)
             {
@@ -57,15 +57,15 @@ public partial class _Default : System.Web.UI.Page
     {
         if (um.Login(txtUsername.Text, txtPassword.Text))
         {
+            new UserModel().createUserLoginLog(txtUsername.Text);
             Session["user"] = new UserModel().getByUserName(txtUsername.Text);
            
             if (CheckBox1.Checked)
             {
                 Response.Cookies["user"].Value = txtUsername.Text;
                 Response.Cookies["user"].Expires = DateTime.Now.AddDays(15);
-            }
+            }            
             
-            new UserModel().createUserLoginLog(txtUsername.Text);
             Response.Redirect("~/Home.aspx");
         }
     }

@@ -18,7 +18,11 @@
             <asp:BoundField DataField="ToPhoneNumber" HeaderText="ToPhoneNumber" SortExpression="ToPhoneNumber" />
             <asp:BoundField DataField="contents" HeaderText="contents" SortExpression="contents" />
             <asp:BoundField DataField="create_at" HeaderText="create_at" SortExpression="create_at" />
-            <asp:CommandField ShowDeleteButton="True" />
+            <asp:TemplateField HeaderText="Delete" ShowHeader="False">
+                <ItemTemplate>
+                    <asp:LinkButton ID="LinkButton1"  OnClientClick="return confirm('Are you sure you want to delete this message?');" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete"></asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineSMSConnectionString %>" DeleteCommand="DELETE FROM [SMSData] WHERE [SmsID] = @SmsID" InsertCommand="INSERT INTO [SMSData] ([UserID], [FromPhoneNumber], [ToPhoneNumber], [contents], [create_at], [status]) VALUES (@UserID, @FromPhoneNumber, @ToPhoneNumber, @contents, @create_at, @status)" SelectCommand="SELECT * FROM [SMSData] WHERE (([UserID] = @UserID) AND ([FromPhoneNumber] = @FromPhoneNumber))" UpdateCommand="UPDATE [SMSData] SET [UserID] = @UserID, [FromPhoneNumber] = @FromPhoneNumber, [ToPhoneNumber] = @ToPhoneNumber, [contents] = @contents, [create_at] = @create_at, [status] = @status WHERE [SmsID] = @SmsID">
