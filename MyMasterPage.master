@@ -20,6 +20,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:TextBox runat="server" Visible="false" ID="myID"></asp:TextBox>
         <div id="wrapper">
             <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
@@ -29,7 +30,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="Home.aspx"><i class="fa fa-send"></i> OnlineSMS</a>                    
+                    <a class="navbar-brand" href="Home.aspx"><i class="fa fa-send"></i>OnlineSMS</a>
                 </div>
                 <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
                     Last login :
@@ -52,37 +53,29 @@
                                 <asp:Label ID="fullname" runat="server" ForeColor="White"></asp:Label>
                             </asp:HyperLink>
                         </li>
-
-
                         <li>
                             <a href="Home.aspx" class="<% if (active.Equals("home")) Response.Write("active-menu"); %>"><i class="fa fa-dashboard fa-3x"></i>Home</a>
                         </li>
                         <li>
                             <a href="Inbox.aspx" class="<% if (active.Equals("inbox")) Response.Write("active-menu"); %>"><i class="fa fa-inbox fa-3x"></i>Inbox</a>
-
-
                         </li>
                         <li>
                             <a href="Outbox.aspx" class="<% if (active.Equals("outbox")) Response.Write("active-menu"); %>"><i class="fa fa-reply fa-3x"></i>Outbox</a>
-
                         </li>
 
                         <li>
                             <a href="Contact.aspx" class="<% if (active.Equals("contact")) Response.Write("active-menu"); %>"><i class="fa fa-users fa-3x"></i>ContactList</a>
-
-
                         </li>
                         <li>
                             <a href="Services.aspx" class="<% if (active.Equals("service")) Response.Write("active-menu"); %>"><i class="fa fa-sitemap fa-3x"></i>Services </a>
-
                         </li>
                 </div>
 
             </nav>
             <!-- /. NAV SIDE  -->
             <div id="page-wrapper">
-                <a id="sms" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-send"></i> Send SMS</a>
-             
+                <a id="sms" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-send"></i>Send SMS</a>
+
                 <div class=" text-center">
                     <asp:Label runat="server" ID="info" CssClass="label-success"></asp:Label>
                 </div>
@@ -98,12 +91,25 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h4 class="modal-title">Create quick message</h4>
-                                From:
-                                <asp:TextBox CssClass="form-control disabled" runat="server" ID="myphonenum"></asp:TextBox>
-                                To:<asp:TextBox runat="server" ID="friendNumber" placeholder="Friend's Number" CssClass="form-control"></asp:TextBox>
+                                <div class="form-group">
+                                    <label>Friend</label>
+                                    <asp:DropDownList CssClass="form-control" runat="server" ID="friendNum" DataSourceID="SqlDataSource1" DataTextField="FriendName" DataValueField="FriendNumber"></asp:DropDownList>
+                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineSMSConnectionString %>" SelectCommand="SELECT * FROM [Contact] WHERE ([userID] = @userID)">
+                                        <SelectParameters>
+                                            <asp:ControlParameter ControlID="myID" Name="userID" PropertyName="Text" Type="Int32" />
+                                        </SelectParameters>
+                                    </asp:SqlDataSource>
+                                </div>
+                                <div class="form-group">
+                                    <label>Or a number</label>
+                                    <asp:TextBox runat="server" ID="friendNumber" placeholder="Friend's Number" CssClass="form-control"></asp:TextBox>
+                                </div>
                             </div>
                             <div class="modal-body">
                                 <asp:TextBox runat="server" ID="content" placeholder="Message goes here" Rows="8" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+
+                                <asp:Label runat="server" ID="smsremain"></asp:Label>
+                                <asp:HyperLink runat="server" ID="buyservice"><i class="fa fa-money"></i> Buy more SMS</asp:HyperLink>
                             </div>
                             <div class="modal-footer">
                                 <asp:LinkButton runat="server" CssClass="btn btn-success" OnClick="sendSMS_click" ID="sendSMS"><i class="fa fa-send"></i> Send now</asp:LinkButton>
@@ -114,27 +120,28 @@
             </div>
             <!-- /. PAGE INNER  -->
         </div>
+
         <!-- /. PAGE WRAPPER  -->
-        </div>
+
     </form>
     <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
     <script src="Assets/js/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP SCRIPTS -->
-     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"s></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js" s></script>
     <script src="Assets/js/bootstrap.min.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="Assets/js/jquery.metisMenu.js"></script>
     <script src="Assets/js/custom.js"></script>
-    
-               <script>
-                   $(document).ready(function () {
-                       //$('#TextBox2').datepicker();
-                       //$('#TextBox3').datepicker();
-                       $('#txtStartDate').datepicker();
-                      // $('#txtExpirationDate').datepicker();
-                   });
+
+    <script>
+        $(document).ready(function () {
+            //$('#TextBox2').datepicker();
+            //$('#TextBox3').datepicker();
+            $('#txtStartDate').datepicker();
+            // $('#txtExpirationDate').datepicker();
+        });
     </script>
 </body>
 </html>

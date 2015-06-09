@@ -4,6 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div>
+        <asp:HyperLink runat="server" NavigateUrl="~/MyService.aspx">Go to my service</asp:HyperLink>
         <h2>Add new Service</h2>
         <div class="col-md-5">
             <div class="form-group">
@@ -31,6 +32,7 @@
         </div>
     </div>
     <div>
+        
         <asp:GridView runat="server" CssClass="table table-responsive table-hover" ID="servicelist" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ServiceID" DataSourceID="SqlDataSource1">
             <Columns>
                 <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />

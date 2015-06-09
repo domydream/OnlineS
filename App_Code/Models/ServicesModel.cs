@@ -17,7 +17,7 @@ public class ServicesModel
 	}
 
     public DataTable getServices(Dictionary<string,object> condition,string orderBy) {
-        return this.connect.Select("services", condition, orderBy);
+        return this.connect.Select("[services]", condition, orderBy);
     }
     public DataTable getServices(Dictionary<string, object> condition)
     {
@@ -27,9 +27,14 @@ public class ServicesModel
     {
         return getServices(null);
     }
-
+    public string getServiceID(string ServiceName)
+    {
+        Dictionary<string, object> condition = new Dictionary<string, object>();
+        condition.Add("Name", ServiceName);
+        return getServices(condition).Rows[0]["ServiceID"].ToString(); 
+    }
     public DataTable getServicesCustom(List<string> Columns, Dictionary<string, Object> Condition, string OrderBy) {
-        DataTable datatable = this.connect.Selectcustom("services", Columns, Condition, OrderBy);
+        DataTable datatable = this.connect.Selectcustom("[services]", Columns, Condition, OrderBy);
 
         if (datatable.Rows.Count > 0)       
         {
@@ -80,13 +85,13 @@ public class ServicesModel
         map.Add("contents", Services.Contents);
         map.Add("price", Services.Price);
         map.Add("state", Services.State);     
-        this.connect.Update("Services", map, condition); 
+        this.connect.Update("[Services]", map, condition); 
     }
 
     public void DeleteServices(Service Services) {
         Dictionary<String, Object> condition = new Dictionary<String, Object>();
         condition.Add("ServicesID", Services.ServiceID);
-        this.connect.Delete("Services", condition);
+        this.connect.Delete("[Services]", condition);
     }
 
 

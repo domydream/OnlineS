@@ -51,10 +51,15 @@ public class MessageModel
         return getMessageCustom(Columns, null);
     }
 
-    public DataTable getByID(string id)
+    public DataTable getByUserID(string id,string number, bool inbox)
     {
         Dictionary<string, object> condition = new Dictionary<string, object>();
-        condition.Add("SmsID", id);
+        condition.Add("UserID", id);
+        if (inbox)
+        {
+            condition.Add("ToPhoneNumber", number);
+        }
+        else condition.Add("FromPhoneNumber", number);
         return getMessage(condition); 
      
     }

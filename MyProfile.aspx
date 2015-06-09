@@ -85,7 +85,7 @@
                             </div>
                         </div>
                         <!-- END STAT -->
-                        <div>
+                      <%--  <div>
                             <h4 class="profile-desc-title">About Marcus Doe</h4>
                             <span class="profile-desc-text">Lorem ipsum dolor sit amet diam nonummy nibh dolore. </span>
                             <div class="margin-top-20 profile-desc-link">
@@ -100,7 +100,7 @@
                                 <i class="fa fa-facebook"></i>
                                 <a href="http://www.facebook.com/keenthemes/">keenthemes</a>
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                     <!-- END PORTLET MAIN -->
                 </div>
