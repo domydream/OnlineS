@@ -97,8 +97,7 @@ public class UserModel
         map.Add("fullname", user.FullName);
         map.Add("image", user.Image);
         map.Add("create_at",user.CreateAt);
-        map.Add("last_login",user.LastLogin);
-     
+        map.Add("last_login",user.LastLogin);     
         this.connect.Insert("[User]", map);
     }
 

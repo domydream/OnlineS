@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
           
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+       <%-- <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <asp:TextBox ID="findFriend" runat="server"  CssClass="form-control"></asp:TextBox>
     <cc1:AutoCompleteExtender ID="AutoCompleteExtender1"
@@ -18,6 +18,6 @@
         CompletionInterval="1000"
         TargetControlID="findFriend"
         runat="server" FirstRowSelected="false">
-    </cc1:AutoCompleteExtender>
+    </cc1:AutoCompleteExtender>--%>
 </asp:Content>
 

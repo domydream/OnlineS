@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -40,6 +43,46 @@ public partial class Home : System.Web.UI.Page
 
 
         }
+
+    }
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+    public static List<string> ListUser(string prefixText)
+    {
+        try
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["OnlineSMS"].ToString());
+
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("select * from [user] where phone like @Name+'%' or username like @Name+'%'", con);
+
+            cmd.Parameters.AddWithValue("@Name", prefixText);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+
+            da.Fill(dt);
+            //    BaseConnect sql = new BaseConnect(ConfigurationManager.ConnectionStrings["OnlineSMS"].ConnectionString);
+            //    DataTable dt = sql.excuteQuery("SELECT * FROM [user] WHERE phone LIKE " + prefixText, null);
+            //DataTable dt = new UserModel().getUser();
+
+            List<string> Names = new List<string>();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Names.Add(dt.Rows[i]["username"].ToString());
+            }
+
+            return Names;
+        }
+        catch (Exception)
+        {
+
+            return null;
+        }
+
 
     }
 }

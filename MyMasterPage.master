@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MyMasterPage.master.cs" Inherits="MyMasterPage" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -19,11 +21,17 @@
     <link href="Assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
     <link href="Assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
     <script src="Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-      <style>
-          .white{
-             color:white;
-          }
-      </style>
+    <style>
+        .white {
+            color: white;
+        }
+         search{
+             padding:5px;
+         }
+        .ui-autocomplete {
+            z-index: 2147483647;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -42,11 +50,31 @@
                         <li>
                             <asp:HyperLink CssClass="white" runat="server" NavigateUrl="~/FriendRequest.aspx">
                                 <span class="white">
-                                <i class="fa fa-user-plus fa-2x"></i><span class="badge">
-                                <asp:Label runat="server" ID="countRequest"/></span> Requests  					
+                                    <i class="fa fa-user-plus fa-2x"></i><span class="badge">
+                                        <asp:Label runat="server" ID="countRequest" /></span> Requests  					
                                 </span>
                             </asp:HyperLink>
-                        </li>  
+                        </li>
+                        <li>
+                            <a>
+                                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                <asp:TextBox ID="findFriend" runat="server" CssClass="form-control"></asp:TextBox>
+                                <cc1:AutoCompleteExtender ID="AutoCompleteExtender1"
+                                    EnableCaching="true"
+                                    MinimumPrefixLength="1"
+                                    ServiceMethod="ListUser"
+                                    ServicePath="Home.aspx"
+                                    CompletionSetCount="1"
+                                    UseContextKey="true"
+                                    CompletionInterval="1000"
+                                    TargetControlID="findFriend"
+                                    runat="server" FirstRowSelected="false">
+                                </cc1:AutoCompleteExtender>
+                            </a>
+                        </li>
+                        <li>
+                            <asp:LinkButton OnClick="btnAddfriend_Click" runat="server" ID="btnAddfriend"><i class=" white fa fa-search fa-2x"></i></asp:LinkButton>
+                        </li>
                     </ul>
                 </div>
                 <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
@@ -151,6 +179,6 @@
     <script src="Assets/js/bootstrap.min.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="Assets/js/jquery.metisMenu.js"></script>
-    <script src="Assets/js/custom.js"></script>       
+    <script src="Assets/js/custom.js"></script>
 </body>
 </html>

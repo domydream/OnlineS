@@ -23,13 +23,12 @@ public partial class FriendRequest : System.Web.UI.Page
             {
                 Session["user"] = new UserModel().getByUserName(Request.Cookies["user"].Value);
             }
-            ((MyMasterPage)Master).u = (User)Session["user"];                                                                       
+            ((MyMasterPage)Master).u = (User)Session["user"];
         }
     }
-      [System.Web.Script.Services.ScriptMethod()]      
-      [System.Web.Services.WebMethod ]
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
     public static List<string> ListUser(string prefixText)
-
     {
         try
         {
@@ -46,8 +45,8 @@ public partial class FriendRequest : System.Web.UI.Page
             DataTable dt = new DataTable();
 
             da.Fill(dt);
-        //    BaseConnect sql = new BaseConnect(ConfigurationManager.ConnectionStrings["OnlineSMS"].ConnectionString);
-        //    DataTable dt = sql.excuteQuery("SELECT * FROM [user] WHERE phone LIKE " + prefixText, null);
+            //    BaseConnect sql = new BaseConnect(ConfigurationManager.ConnectionStrings["OnlineSMS"].ConnectionString);
+            //    DataTable dt = sql.excuteQuery("SELECT * FROM [user] WHERE phone LIKE " + prefixText, null);
             //DataTable dt = new UserModel().getUser();
 
             List<string> Names = new List<string>();
@@ -64,7 +63,7 @@ public partial class FriendRequest : System.Web.UI.Page
 
             return null;
         }
-       
+
 
     }
 
