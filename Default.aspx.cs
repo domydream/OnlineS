@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Recaptcha.Web;
 using System.Security.Cryptography;
 using System.Text;
+using OnlineSMS.App_Code.Entities;
 public partial class _Default : System.Web.UI.Page
 {
     UserModel um = new UserModel();
@@ -41,8 +42,15 @@ public partial class _Default : System.Web.UI.Page
                 UserProfile up = new UserProfile();
                 up.UserID = ((User)Session["user"]).UserID;                
                 new UserProfileModel().InsertUserProfile(up);
+                UserService us = new UserService();
+                us.ServiceID =int.Parse( new ServicesModel().getServiceID("SMS"));
+                us.UserID = up.UserID;
+                us.Quantity = 5;
+                us.StartDate = DateTime.Now.ToString();
+                us.ExpirationDate=DateTime.Now.AddDays(30).ToString();
+                new UserServiceModel().InsertUserService(us);
                 Response.Redirect("~/MyProfile.aspx");      
-            }
+            }                                        
             if (result == RecaptchaVerificationResult.IncorrectCaptchaSolution)
             {
                 lblMessage.Text = "Incorrect captcha response.";

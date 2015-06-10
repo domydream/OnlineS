@@ -26,7 +26,7 @@ public partial class Home : System.Web.UI.Page
             u = (User)Session["user"];
 
             funame.Text = u.FullName;
-
+            
             try
             {
                 countMessage.Text = new MessageModel().getByUserID(u.UserID.ToString(), u.Phone, true).Rows.Count.ToString();

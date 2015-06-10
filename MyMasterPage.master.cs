@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -20,10 +21,11 @@ public partial class MyMasterPage : System.Web.UI.MasterPage
         myID.Text = u.UserID.ToString();
         try
         {
-            smsremain.Text = "You have" + new UserServiceModel().getByUserService(u.UserID.ToString()).Rows[0]["quantity"].ToString() + "free sms remain";
+            smsremain.Text = "You have " + new UserServiceModel().getByUserService(u.UserID.ToString()).Rows[0]["quantity"].ToString() + " free sms remain";
             friendNumber.Enabled = true;                 
             content.Enabled = true;
             sendSMS.Visible = true;
+            
         }                                                                 
         catch (Exception)
         {
@@ -62,9 +64,18 @@ public partial class MyMasterPage : System.Web.UI.MasterPage
            //insert message for send contact
             new MessageModel().InsertMessage(m);     
            //insert message for receive contact
-            m.UserID = new UserModel().getByPhoneNum(m.ToPhoneNumber).UserID;      
-            new MessageModel().InsertMessage(m);
+            try
+            {
+                m.UserID = new UserModel().getByPhoneNum(m.ToPhoneNumber).UserID;
+                new MessageModel().InsertMessage(m);
+            }
+            catch (Exception)
+            {
+                info.Text = "Error occur! please check your number phone";
+                info.CssClass = "label-warning";                   
+            }
             new UserServiceModel().decQuantitySMS(u.UserID.ToString());
+          
             info.Text = "Your message was sent!";
             content.Text = "";
             Response.Redirect(Request.RawUrl);

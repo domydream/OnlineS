@@ -76,44 +76,27 @@ public class UserServiceModel
         this.connect.Insert("UserService", map);
     }
 
-    public void UpdateUserService(UserService UserService)
+    public void UpdateUserService(int quantity, string userID, string serviceID)
     {
         Dictionary<String, Object> condition = new Dictionary<String, Object>();
-        condition.Add("UserID", UserService.UserID);
-        condition.Add("ServiceID", UserService.ServiceID);
-        Dictionary<String, Object> map = new Dictionary<String, Object>();
-        map.Add("userID", UserService.UserID);
-        map.Add("ServiceID", UserService.ServiceID);
-        map.Add("Quantity", UserService.Quantity);
-        map.Add("State", UserService.State);
-        map.Add("StartDate", UserService.StartDate);
-        map.Add("ExpirationDate", UserService.ExpirationDate);
+        condition.Add("UserID", userID);
+        condition.Add("ServiceID",serviceID);
+        Dictionary<String, Object> map = new Dictionary<String, Object>();           
+        map.Add("Quantity", quantity);           
         this.connect.Update("UserService", map, condition);
     }
     public void decQuantitySMS(string userID)
     {
-        try
+        string ServiceID = new ServicesModel().getServiceID("SMS");
+        Dictionary<string, object> condition = new Dictionary<string, object>();
+        condition.Add("ServiceID", ServiceID);
+        condition.Add("UserID", userID);
+        DataTable dt = new UserServiceModel().getUserService(condition);
+        if (dt.Rows.Count > 0)
         {
-            Dictionary<String, Object> condition = new Dictionary<String, Object>();
-            condition.Add("UserID", userID);
-            condition.Add("ServiceID", new ServicesModel().getServiceID("SMS"));
-
-            int i = int.Parse(this.getUserService(condition).Rows[0]["Quantity"].ToString());
-            if (i > 0)
-            {
-                i = i - 1;
-                Dictionary<String, Object> map = new Dictionary<String, Object>();
-                map.Add("Quantity", i);
-                this.connect.Update("UserService", map, condition);
-            }
+            int i = int.Parse(dt.Rows[0]["Quantity"].ToString());
+            new UserServiceModel().UpdateUserService(i - 1, userID, ServiceID);
         }
-        catch (Exception)
-        {
-
-            throw;
-        }
-
-
 
     }
     public void DeleteUserService(UserService UserService)

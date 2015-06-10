@@ -23,8 +23,7 @@ public partial class MyService : System.Web.UI.Page
                 Session["user"] = new UserModel().getByUserName(Request.Cookies["user"].Value);
             }
             ((MyMasterPage)Master).u = (User)Session["user"];
-            userID.Text = ((User)Session["user"]).UserID.ToString();
-           
+            userID.Text = ((User)Session["user"]).UserID.ToString();            
         }
     }
     protected void btnregister_Click(object sender, EventArgs e)
@@ -34,7 +33,7 @@ public partial class MyService : System.Web.UI.Page
         u.UserID = ((User)Session["user"]).UserID;
         u.Quantity = int.Parse(txtQuantity.Text);
         u.StartDate = txtStartDate.Value;
-        u.ExpirationDate = txtExpirationDate.Text;
+        u.ExpirationDate = txtExpirationDate.Value;
         u.State = 1;
         new UserServiceModel().InsertUserService(u);
         Response.Redirect(Request.RawUrl);

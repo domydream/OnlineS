@@ -1,15 +1,21 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MyMasterPage.master" AutoEventWireup="true" CodeFile="MyService.aspx.cs" Inherits="MyService" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link href="Assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
-    <link href="Assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />          
-  <script src="Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+        <link href="Assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+    <link href="Assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <script src="Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:TextBox runat="server" ID="userID" Visible="false"></asp:TextBox>
-    <a id="sms1" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>Add new service</a>
+    <a id="sms1" class="btn btn-success" data-toggle="modal" data-target="#myModal1"><i class="fa fa-plus"></i>Add new service</a>
     <hr />
-    <div class="modal fade" id="myModal" role="dialog">
+    <input type="text" id="Text1" runat="server" class="form-control" />
+    <style>
+        .ui-datepicker {
+            z-index: 1151 !important;
+        }
+    </style>
+    <div class="modal fade" id="myModal1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -27,12 +33,13 @@
                         <asp:TextBox runat="server" CssClass="form-control" ID="txtQuantity"></asp:TextBox>
                         <div class="form-group">
                             <label>Start date</label>
-                            <input type="text" id="txtStartDate" runat="server" class="form-control" />      
-                            <%--<asp:TextBox runat="server" CssClass="form-control" ID="txtStartDate"></asp:TextBox>--%>                               
+                            <input type="text" id="txtStartDate" runat="server" class="form-control" />
+                            <%--<asp:TextBox runat="server" CssClass="form-control" ID="txtStartDate"></asp:TextBox>--%>
                         </div>
                         <div class="form-group">
-                            <label>Expiration Date</label>                              
-                            <asp:TextBox runat="server" CssClass="form-control" ID="txtExpirationDate"></asp:TextBox>
+                            <label>Expiration Date</label>
+                            <input type="text" id="txtExpirationDate" runat="server" class="form-control" />
+                            <%--<asp:TextBox runat="server" CssClass="form-control" ID="txtExpirationDate"></asp:TextBox>--%>
                         </div>
                         <div class="form-group">
                             <label>Register code</label>
@@ -240,5 +247,13 @@
             <asp:Parameter Name="ServiceID" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
-   
+    <script>
+        $(function () {
+            $('#TextBox2').datepicker();
+            $('#Text1').datepicker();     
+            $('#TextBox3').datepicker();
+            $('#txtStartDate').datepicker();
+            $('#txtExpirationDate').datepicker();
+        });
+    </script>
 </asp:Content>
