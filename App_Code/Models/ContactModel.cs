@@ -93,10 +93,10 @@ public class ContactModel
         this.connect.Delete("[Contact]", condition);
     }
 
-    public DataTable getUserContact(int id){
+    public DataTable getRequestContact(int id){
         Dictionary<string, object> condition = new Dictionary<string, object>();
         condition.Add("userID", id);
-        condition.Add("Status",1);
+        condition.Add("Status",0);
         return getContact(condition); 
     }
 

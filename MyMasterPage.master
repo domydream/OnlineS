@@ -19,7 +19,11 @@
     <link href="Assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
     <link href="Assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
     <script src="Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-
+      <style>
+          .white{
+             color:white;
+          }
+      </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -34,6 +38,15 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="Home.aspx"><i class="fa fa-send"></i>OnlineSMS</a>
+                    <ul class="nav navbar-nav pull-right">
+                        <li>
+                            <asp:HyperLink CssClass="white" runat="server" NavigateUrl="~/FriendRequest.aspx">
+                                <span class="white">
+                                <i class="fa fa-user-plus fa-2x"></i><span class="badge"> 7 </span> Requests  					
+                                </span>
+                            </asp:HyperLink>
+                        </li>  
+                    </ul>
                 </div>
                 <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
                     Last login :
@@ -111,7 +124,8 @@
                             <div class="modal-body">
                                 <asp:TextBox runat="server" ID="content" placeholder="Message goes here" Rows="8" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
 
-                                <asp:Label runat="server" ID="smsremain"></asp:Label>  <br />
+                                <asp:Label runat="server" ID="smsremain"></asp:Label>
+                                <br />
                                 <asp:HyperLink runat="server" NavigateUrl="~/MyService.aspx" ID="buyservice"><i class="fa fa-money"></i> Buy more SMS</asp:HyperLink>
                             </div>
                             <div class="modal-footer">
@@ -136,8 +150,6 @@
     <script src="Assets/js/bootstrap.min.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="Assets/js/jquery.metisMenu.js"></script>
-    <script src="Assets/js/custom.js"></script>
-
-    
+    <script src="Assets/js/custom.js"></script>       
 </body>
 </html>
