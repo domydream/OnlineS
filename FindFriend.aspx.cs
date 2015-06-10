@@ -26,7 +26,7 @@ public partial class FindFriend : System.Web.UI.Page
         }
         try
         {
-            u = new UserModel().getByUserName(Request["username"]);
+            u = new UserModel().getByUserName(Request["key"]);
             Fullname.Text = u.FullName;
             lblEmail.Text = u.Email;
             lblPhone.Text = u.Phone;
@@ -35,9 +35,30 @@ public partial class FindFriend : System.Web.UI.Page
         }
         catch (Exception)
         {
-            
-            throw;
+
+            info.Text = "Username doesn't exists";
+            info.CssClass = "label-warning";
         }
       
+    }
+    protected void Requestbutton_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Contact con = new Contact();
+            con.FriendName = u.FullName;
+            con.FriendNumber = u.Phone;
+            con.Status = 0;              
+            con.UserID = u.UserID;
+            new ContactModel().InsertContact(con);
+            con.UserID = new UserModel().getByUserName(Request.Cookies["user"].Value).UserID;
+            new ContactModel().InsertContact(con);
+            Response.Redirect("~/FriendRequest.aspx");
+        }
+        catch (Exception)
+        {                        
+           
+        }
+        
     }
 }

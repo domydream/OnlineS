@@ -5,6 +5,8 @@ using System.Web;
 using System.Data;
 using System.Text;
 using System.Security.Cryptography;
+using System.Configuration;
+using System.Data.SqlClient;
 
 /// <summary>
 /// Summary description for UserModel
@@ -181,7 +183,40 @@ public class UserModel
     }
 
 
+    public List<User> Search(string key)
+    {
+        try
+        {
+            List<User> list = new List<User>();
 
+            SqlConnection con= new SqlConnection( ConfigurationManager.ConnectionStrings["OnlineSMS"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("select * from [user] where phone like @Name+'%' or username like @Name+'%'");
+            cmd.Parameters.AddWithValue("@Name", key);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);    
+            DataTable dt = new DataTable();  
+            da.Fill(dt);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                User u = new User();
+                u.UserID = int.Parse(dt.Rows[i]["UserID"].ToString());
+                u.UserName = dt.Rows[i]["UserName"].ToString();
+                u.Email = dt.Rows[i]["Email"].ToString();
+                u.Phone = dt.Rows[i]["phone"].ToString();
+                u.FullName = dt.Rows[i]["fullname"].ToString();
+                u.Image = dt.Rows[i]["image"].ToString();
+                u.CreateAt = dt.Rows[i]["create_at"].ToString();
+                u.LastLogin = dt.Rows[i]["last_login"].ToString();
+                list.Add(u);
+            }
+            return list;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+       
+    }
 
 
     public string GetMD5HashData(string data)

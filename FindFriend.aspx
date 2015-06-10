@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row container">
-
+            <asp:Label ID="info"  runat="server"></asp:Label>
         <div class="panel panel-info col-md-8 col-md-offset-1 ">
             <div class="panel-heading">
                 <asp:Label ID="Fullname" runat="server" />
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="panel-footer">
-                <asp:LinkButton ID="Requestbutton" CssClass="btn btn-success" runat="server" ><i class="fa fa-user-plus"></i>Send friend request</asp:LinkButton>
+                <asp:LinkButton ID="Requestbutton" OnClick="Requestbutton_Click" CssClass="btn btn-success" runat="server" ><i class="fa fa-user-plus"></i> Send friend request </asp:LinkButton>
               
             </div>
         </div>

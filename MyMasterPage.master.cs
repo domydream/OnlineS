@@ -135,6 +135,6 @@ public partial class MyMasterPage : System.Web.UI.MasterPage
 
     protected void btnAddfriend_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/FindFriend.aspx?Username=" + findFriend.Text);
+        Response.Redirect("~/FindFriend.aspx?key=" + findFriend.Text);
     }
 }
