@@ -24,8 +24,7 @@ public partial class FriendRequest : System.Web.UI.Page
                 Session["user"] = new UserModel().getByUserName(Request.Cookies["user"].Value);
             }
             ((MyMasterPage)Master).u = (User)Session["user"];
-            myID.Text = ((User)Session["user"]).UserID.ToString();
-            mynum.Text = ((User)Session["user"]).Phone;
+            myID.Text = ((User)Session["user"]).UserID.ToString();        
         }
     }
   
