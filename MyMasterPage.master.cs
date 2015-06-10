@@ -16,19 +16,19 @@ public partial class MyMasterPage : System.Web.UI.MasterPage
     {
         lastlogin.Text = u.LastLogin;
         avatar.ImageUrl = u.Image;
-        fullname.Text = u.FullName;
-
+        fullname.Text = u.FullName;   
         myID.Text = u.UserID.ToString();
         try
         {
+            countRequest.Text = new ContactModel().getRequestContact(u.UserID).Rows.Count.ToString();
             smsremain.Text = "You have " + new UserServiceModel().getByUserService(u.UserID.ToString()).Rows[0]["quantity"].ToString() + " free sms remain";
             friendNumber.Enabled = true;                 
             content.Enabled = true;
-            sendSMS.Visible = true;
-            
+            sendSMS.Visible = true;                
         }                                                                 
         catch (Exception)
         {
+            countRequest.Text = "0";
             smsremain.Text = "You can't send a SMS. Go to service to buy more sms";
             friendNumber.Enabled = false;               
             content.Enabled = false;

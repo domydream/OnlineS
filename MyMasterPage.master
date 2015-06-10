@@ -42,7 +42,7 @@
                         <li>
                             <asp:HyperLink CssClass="white" runat="server" NavigateUrl="~/FriendRequest.aspx">
                                 <span class="white">
-                                <i class="fa fa-user-plus fa-2x"></i><span class="badge"> 7 </span> Requests  					
+                                <i class="fa fa-user-plus fa-2x"></i><span class="badge"> <asp:Label runat="server" ID="countRequest"/></span> Requests  					
                                 </span>
                             </asp:HyperLink>
                         </li>  
