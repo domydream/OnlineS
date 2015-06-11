@@ -10,6 +10,9 @@
     <link href="Assets/plugins/bootstrap/css/style-metronic.css" rel="stylesheet" />
     <link href="Assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <link href="Assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+    <link href="Assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <script src="Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 </head>
 <body>
     
@@ -139,6 +142,7 @@
     </form>
     <script src="Assets/js/jquery-1.10.2.js"></script>
     <script src="Assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+ 
     <%--   --%>
 </body>
 </html>

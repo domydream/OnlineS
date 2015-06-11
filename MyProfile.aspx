@@ -1,19 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MyMasterPage.master" AutoEventWireup="true" CodeFile="MyProfile.aspx.cs" Inherits="MyProfile" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link href="Assets/css/profile.css" rel="stylesheet" />
-    <script type="text/javascript">
-        function ShowImagePreview(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#<%=ImgPrv.ClientID%>').prop('src', e.target.result)
-                };
-                reader.readAsDataURL(input.files[0]);
-                }
-            }
-    </script>
-    <link href="Assets/css/tasks.css" rel="stylesheet" />
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">   
+         
+    <link href="Assets/css/profile.css" rel="stylesheet" />  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
@@ -229,18 +218,18 @@
                                                     <div class="form-group">
                                                         <label class="control-label">Full Name</label>
                                                         <asp:TextBox runat="server" CssClass="form-control" placeholder="Enter your name" ID="txtFullname"></asp:TextBox>
-
+                                                        <asp:RequiredFieldValidator ControlToValidate="txtFullname"  ValidationGroup="profile" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Your name is required"></asp:RequiredFieldValidator>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Email</label>
                                                         <asp:TextBox runat="server" CssClass="form-control" placeholder="Your Email address" ID="txtEmail"></asp:TextBox>
-
+                                                        <asp:RegularExpressionValidator ControlToValidate="txtEmail" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ValidationGroup="profile" ID="RegularExpressionValidator1" runat="server" ErrorMessage="Email is not correct format"></asp:RegularExpressionValidator>
 
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Mobile Number</label>
                                                         <asp:TextBox runat="server" CssClass="form-control" placeholder="your phone number" ID="txtPhone"></asp:TextBox>
-
+                                                        <asp:RequiredFieldValidator  ValidationGroup="profile" ControlToValidate="txtPhone" ID="RequiredFieldValidator2" runat="server" ErrorMessage="Phone is required"></asp:RequiredFieldValidator>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label">Gender</label>
@@ -298,7 +287,7 @@
 
                                                     </div>
                                                     <div class="margiv-top-10">
-                                                      <asp:LinkButton ID="editProfile" runat="server" OnClick="editProfile_Click" CssClass="btn btn-success">Save</asp:LinkButton>
+                                                      <asp:LinkButton  ValidationGroup="profile" ID="editProfile" runat="server" OnClick="editProfile_Click" CssClass="btn btn-success">Save</asp:LinkButton>
                                                        
                                                     </div>
 
@@ -408,7 +397,31 @@
         <!-- END PAGE CONTENT-->
 
     </div>
-     
+     <script type="text/javascript">
+         function ShowImagePreview(input) {
+             if (input.files && input.files[0]) {
+                 var reader = new FileReader();
+                 reader.onload = function (e) {
+                     $('#<%=ImgPrv.ClientID%>').prop('src', e.target.result)
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                    }
+                }
+    </script>
+   <script>
+       $(document).ready(function () {
+           var dp = $('#<%=txtDOB.ClientID%>');
+               dp.datepicker({
+                   changeMonth: true,
+                   changeYear: true,
+                   format: "dd/mm/yyyy",
+                   language: "en"
+               }).on('changeDate', function (ev) {
+                   $(this).blur();
+                   $(this).datepicker('hide');
+               });
+           });
+    </script>  
 </asp:Content>
 
 

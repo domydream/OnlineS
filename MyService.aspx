@@ -9,11 +9,9 @@
     <asp:TextBox runat="server" ID="userID" Visible="false"></asp:TextBox>
     <a id="sms1" class="btn btn-success" data-toggle="modal" data-target="#myModal1"><i class="fa fa-plus"></i>Add new service</a>
     <hr />
-    <input type="text" id="Text1" runat="server" class="form-control" />
+ 
     <style>
-        .ui-datepicker {
-            z-index: 1151 !important;
-        }
+       .datepicker{z-index:1151 !important;}
     </style>
     <div class="modal fade" id="myModal1" role="dialog">
         <div class="modal-dialog">
@@ -248,12 +246,28 @@
         </UpdateParameters>
     </asp:SqlDataSource>
     <script>
-        $(function () {
-            $('#TextBox2').datepicker();
-            $('#Text1').datepicker();     
-            $('#TextBox3').datepicker();
-            $('#txtStartDate').datepicker();
-            $('#txtExpirationDate').datepicker();
-        });
-    </script>
+        $(document).ready(function () {
+            var dp = $('#<%=txtStartDate.ClientID%>');
+            $('#<%=txtStartDate.ClientID%>').datepicker({
+               changeMonth: true,
+               changeYear: true,
+               format: "dd/mm/yyyy",
+               language: "en"
+           }).on('changeDate', function (ev) {
+               $(this).blur();
+               $(this).datepicker('hide');
+           });
+            $('#<%=txtExpirationDate.ClientID%>').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                format: "dd/mm/yyyy",
+                language: "en"
+            }).on('changeDate', function (ev) {
+                $(this).blur();
+                $(this).datepicker('hide');
+            });
+         
+       });
+    </script> 
+  
 </asp:Content>
