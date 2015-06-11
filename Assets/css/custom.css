@@ -2,7 +2,7 @@
 /*=============================================================
     Authour URI: www.binarycart.com
     License: Commons Attribution 3.0
-
+                                                       min-height:800px;
     http://creativecommons.org/licenses/by/3.0/
 
     100% To use For Personal And Commercial Use.
@@ -23,7 +23,7 @@ body {
 
 #page-wrapper {
     padding: 15px 15px;
-
+    min-height: 600px;
     background:#F3F3F3;
    
 }
@@ -32,7 +32,7 @@ body {
     margin:10px 20px 10px 0px;
     background-color:#fff!important;
     padding:10px;
-   
+    min-height:800px;
 }
 
 .text-center {
@@ -197,7 +197,7 @@ color: #8d8888;
 
 
 .user-image {
- margin: 25px auto;
+    margin: 25px auto;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
@@ -359,7 +359,7 @@ line-height: 1.428571429;
      #page-wrapper{
                margin: 0 0 0 260px;
         padding: 15px 30px;
-       
+        min-height: 800px;
 		
     }
 	

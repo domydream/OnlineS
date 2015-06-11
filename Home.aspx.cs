@@ -32,11 +32,13 @@ public partial class Home : System.Web.UI.Page
             
             try
             {
+                countRequest.Text = new ContactModel().getRequestContact(u.UserID).Rows.Count.ToString();
                 countMessage.Text = new MessageModel().getByUserID(u.UserID.ToString(), u.Phone, true).Rows.Count.ToString();
                 countSMSService.Text = new UserServiceModel().getByUserService(u.UserID.ToString()).Rows[0]["quantity"].ToString();
             }
             catch (Exception)
             {
+                countRequest.Text = "0";
                 countMessage.Text = "0";
                 countSMSService.Text = "0";
             }
@@ -64,10 +66,7 @@ public partial class Home : System.Web.UI.Page
             DataTable dt = new DataTable();
 
             da.Fill(dt);
-            //    BaseConnect sql = new BaseConnect(ConfigurationManager.ConnectionStrings["OnlineSMS"].ConnectionString);
-            //    DataTable dt = sql.excuteQuery("SELECT * FROM [user] WHERE phone LIKE " + prefixText, null);
-            //DataTable dt = new UserModel().getUser();
-
+                            
             List<string> Names = new List<string>();
 
             for (int i = 0; i < dt.Rows.Count; i++)

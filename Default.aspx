@@ -14,7 +14,7 @@
 <body>
     
     <form id="form1" runat="server">
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#c40000; color:white;">
             <div class="container" style="margin-top: 10px;">
                 <div class="navbar-header">
                     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
@@ -22,7 +22,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><i class="fa fa-send fa-2x"></i>ONLINESMS</a>
+                    <a class="navbar-brand" style="color:white;" href="#"><i class="fa fa-send fa-2x"></i>ONLINESMS</a>
                 </div>
                 <center>
                 <div class="navbar-collapse collapse" id="navbar-main">                
@@ -45,10 +45,10 @@
                                 <asp:TextBox ID="txtPassword"  placeholder="Password" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
                                  </div>
                         </div>
-                         <asp:LinkButton ID="btnLogin" CssClass="btn btn-success" runat="server" OnClick="btnLogin_Click"><i class="fa fa-send"></i> SIGN IN</asp:LinkButton>
+                         <asp:LinkButton ID="btnLogin" CssClass="btn btn-success" runat="server" OnClick="btnLogin_Click"><i class="fa fa-send"></i> SIGN IN</asp:LinkButton><br />
                         <asp:Label runat="server" ID="validateUser"></asp:Label><br />
                         <asp:CheckBox ID="CheckBox1" runat="server"></asp:CheckBox> Remember me &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                        <a>Forget your password? </a>
+                        
                     </div>
                 </div>
             </center>
@@ -56,8 +56,10 @@
         </nav>
         <div class="container">
             <div class="row" style="margin-top: 50px;">
-                <div class="col-md-8"></div>
-                <div class="col-md-4">
+                <div class="col-md-8">
+                     <img class="img-responsive" src="sms.gif" style="width:100%; margin-top: 50px auto; padding:80px;"   />
+                </div>
+                <div class="col-md-4" style="background-color:#fcfcfc; padding-left:30px; padding-right:30px; padding-top:10px;padding-bottom:10px; margin-top:20px; margin-bottom:20px; overflow:auto">
                     <h3>CREATE NEW ACCOUNT</h3>
                     <div class=" form-horizontal">
                         <div class="form-body ">

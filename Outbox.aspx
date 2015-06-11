@@ -15,7 +15,7 @@
 
     <asp:GridView ID="GridView1" CssClass="table table-hover table-responsive" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="SmsID" DataSourceID="SqlDataSource1">
         <Columns>
-            <asp:BoundField DataField="ToPhoneNumber" HeaderText="ToPhoneNumber" SortExpression="ToPhoneNumber" />
+            <asp:BoundField DataField="ToPhoneNumber" HeaderText="To Phone Number" SortExpression="ToPhoneNumber" />
             <asp:BoundField DataField="contents" HeaderText="contents" SortExpression="contents" />
             <asp:BoundField DataField="create_at" HeaderText="create_at" SortExpression="create_at" />
             <asp:TemplateField HeaderText="Delete" ShowHeader="False">

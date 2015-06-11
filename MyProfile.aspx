@@ -46,9 +46,9 @@
 
                                 <li class="active"><a href="#home" data-toggle="tab"><span class="glyphicon glyphicon-home "></span>OverView</a></li>
 
-                                <li><a href="#setting" data-toggle="tab"><span class="glyphicon glyphicon-pencil"></span>Acount Setting</a></li>
+                                <li><a href="#setting" data-toggle="tab"><span class="glyphicon glyphicon-pencil"></span>Account Setting</a></li>
 
-                                <li><a href="#tasks" data-toggle="tab"><span class="glyphicon glyphicon-tasks"></span>Task</a></li>
+                                <li><a href="#tasks" data-toggle="tab"><span class="fa fa-key"></span>Deactive your Account</a></li>
 
                             </ul>
                         </div>
@@ -58,7 +58,7 @@
                     <!-- PORTLET MAIN -->
                     <div class="portlet light">
                         <!-- STAT -->
-                        <div class="row list-separated profile-stat">
+                       <%-- <div class="row list-separated profile-stat">
                             <div class="col-md-4 col-sm-4 col-xs-6">
                                 <div class="uppercase profile-stat-title">
                                     37
@@ -83,7 +83,7 @@
                                     Uploads
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <!-- END STAT -->
                       <%--  <div>
                             <h4 class="profile-desc-title">About Marcus Doe</h4>
@@ -216,9 +216,9 @@
                                                 <li>
                                                     <a href="#tab_1_3" data-toggle="tab">Change Password</a>
                                                 </li>
-                                                <li>
+                                                <%--<li>
                                                     <a href="#tab_1_4" data-toggle="tab">Privacy Settings</a>
-                                                </li>
+                                                </li>--%>
                                             </ul>
                                         </div>
                                         <div class="portlet-body">
@@ -309,9 +309,9 @@
                                                     <fieldset style="width: 300px;">
                                                         <legend>Show image preview before image upload</legend>
                                                         <div style="text-align: center;">
-                                                            <asp:Image ID="ImgPrv" CssClass="img-responsive img-circle" runat="server" /><br />
-                                                            <asp:FileUpload ID="flupImage" runat="server" onchange="ShowImagePreview(this);" />
-                                                            <asp:LinkButton runat="server" OnClick="imgUpload_Click" ID="imgUpload"><i class="fa fa-upload"></i> Upload & Change Avatar</asp:LinkButton>
+                                                            <asp:Image ID="ImgPrv" CssClass="img-responsive img-circle" Width="150px" Height="150px" runat="server" /><br />
+                                                            <asp:FileUpload CssClass="btn btn-default" ID="flupImage" runat="server" onchange="ShowImagePreview(this);" />
+                                                            <asp:LinkButton CssClass="btn btn-success" runat="server" OnClick="imgUpload_Click" ID="imgUpload"><i class="fa fa-upload"></i> Upload & Change Avatar</asp:LinkButton>
                                                         </div>
                                                     </fieldset>
                                                 </div>
@@ -387,7 +387,16 @@
                                     </div>
 
                                 </div>
-                                <div class="tab-pane" id="tasks">favorite</div>
+                                <div class="tab-pane" id="tasks">
+                                    <div class="panel-info">
+                                        When deactive your account, all of your information include SMS, Contact infor, your photo will be delete! 
+                                        Be careful with your choose!
+                                    </div>
+                                    <div>
+                                        <asp:Label ID="returndelete" runat="server"></asp:Label>  <br />
+                                        <asp:LinkButton runat="server" CssClass="btn btn-danger" ID="deactive" OnClick="deactive_Click" OnClientClick="return confirm('Are you sure?')"><i class="fa fa-user-secret"></i> Deactive your account</asp:LinkButton>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

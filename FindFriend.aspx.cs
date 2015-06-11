@@ -63,8 +63,9 @@ public partial class FindFriend : System.Web.UI.Page
             Response.Redirect("~/FriendRequest.aspx");
         }
         catch (Exception)
-        {                        
-           
+        {
+            info.Text = "You can't send friend request to this user";
+            info.CssClass = "label-success";
         }
         
     }

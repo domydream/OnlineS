@@ -125,7 +125,7 @@
                     <asp:Label runat="server" ID="info" CssClass="label-success"></asp:Label>
                 </div>
 
-                <div id="page-inner">
+                <div id="page-inner" class="container"> 
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
@@ -151,14 +151,14 @@
                                 </div>
                             </div>
                             <div class="modal-body">
-                                <asp:TextBox runat="server" ID="content" placeholder="Message goes here" Rows="8" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
-
+                                <asp:TextBox runat="server" ValidationGroup="sms" ID="content" placeholder="Message goes here" Rows="8" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator ValidationGroup="sms" ID="RequiredFieldValidator1" ControlToValidate="content" runat="server" ErrorMessage="Content required!"></asp:RequiredFieldValidator>
                                 <asp:Label runat="server" ID="smsremain"></asp:Label>
                                 <br />
                                 <asp:HyperLink runat="server" NavigateUrl="~/MyService.aspx" ID="buyservice"><i class="fa fa-money"></i> Buy more SMS</asp:HyperLink>
                             </div>
                             <div class="modal-footer">
-                                <asp:LinkButton runat="server" CssClass="btn btn-success" OnClick="sendSMS_click" ID="sendSMS"><i class="fa fa-send"></i> Send now</asp:LinkButton>
+                                <asp:LinkButton runat="server" ValidationGroup="sms" CssClass="btn btn-success" OnClick="sendSMS_click" ID="sendSMS"><i class="fa fa-send"></i> Send now</asp:LinkButton>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -110,7 +111,10 @@ public partial class MyProfile : System.Web.UI.Page
                     string newp = new UserModel().GetMD5HashData(newpass.Text);
                     new UserModel().ChangePassword(u.UserID, newp);
                     Session.Clear();
-                    Request.Cookies["user"].Expires = DateTime.Now.AddDays(-1);
+                    if (Request.Cookies["user"].Expires > DateTime.Now)
+                    {
+                        Request.Cookies["user"].Expires = DateTime.Now.AddDays(-1);
+                    }
                     Response.Redirect("~/Default.aspx");
                 }
             }
@@ -138,12 +142,28 @@ public partial class MyProfile : System.Web.UI.Page
             up.Qualification = txtQualification.Text;
             up.School = txtSchool.Text;
             up.Sport = txtSport.Text;
-            up.WorkStatus = txtWork.Text;
+            up.WorkStatus = txtWork.Text; 
       
             new UserProfileModel().UpdateUserProfile(up);
             new UserModel().UpdateUser(u);
             Session["user"] = u;
             Response.Redirect("~/MyProfile.aspx");
+        }
+    }
+    protected void deactive_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            BaseConnect sql = new BaseConnect(ConfigurationManager.ConnectionStrings["OnlineSMS"].ConnectionString);
+            sql.executeNonQuery("DELETE FROM SmsData WHERE UserID=" + u.UserID.ToString(),null,null);
+            sql.executeNonQuery("DELETE FROM contact WHERE UserID= " + u.UserID.ToString(), null, null);
+            sql.executeNonQuery("DELETE FROM userservice WHERE UserID= " + u.UserID.ToString(), null, null);
+            sql.executeNonQuery("DELETE FROM user WHERE UserID= " + u.UserID.ToString(), null, null);
+            Response.Redirect("~/Default.aspx");
+        }
+        catch (Exception)
+        {
+            returndelete.Text = "Having error occur";
         }
     }
 }

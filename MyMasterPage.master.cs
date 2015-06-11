@@ -29,7 +29,7 @@ public partial class MyMasterPage : System.Web.UI.MasterPage
             sendSMS.Visible = true;                
         }                                                                 
         catch (Exception)
-        {
+        {   
             countRequest.Text = "0";
             smsremain.Text = "You can't send a SMS. Go to service to buy more sms";
             friendNumber.Enabled = false;               
@@ -59,7 +59,7 @@ public partial class MyMasterPage : System.Web.UI.MasterPage
         }
          
         m.Content = content.Text;
-        m.Status = 1; 
+        m.Status = 2; //for my outbox pending message
         m.CreateAt = DateTime.Now;
         try
         {
@@ -69,6 +69,7 @@ public partial class MyMasterPage : System.Web.UI.MasterPage
             try
             {
                 m.UserID = new UserModel().getByPhoneNum(m.ToPhoneNumber).UserID;
+                m.Status = 0;  //for friend inbox not view message
                 new MessageModel().InsertMessage(m);
             }
             catch (Exception)

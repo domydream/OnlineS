@@ -27,7 +27,7 @@ public partial class Services : System.Web.UI.Page
     protected void submit_Click(object sender, EventArgs e)
     {
         if (new UserModel().Login(uname.Text, pass.Text) ) { 
-            if( uname.Text.Equals("panda")){
+            if( uname.Text.Equals("admin")){
                 Response.Redirect("~/ServicesControl.aspx");
             }
             else
