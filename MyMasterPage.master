@@ -58,7 +58,7 @@
                         <li>
                             <a>
                                 <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                                <asp:TextBox ID="findFriend" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="findFriend" placeholder="Enter phone number or Username to search" runat="server" CssClass="form-control"></asp:TextBox>
                                 <cc1:AutoCompleteExtender ID="AutoCompleteExtender1"
                                     EnableCaching="true"
                                     MinimumPrefixLength="1"

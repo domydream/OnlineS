@@ -25,7 +25,7 @@ public partial class FindFriend : System.Web.UI.Page
                 Session["user"] = new UserModel().getByUserName(Request.Cookies["user"].Value);
             }
             ((MyMasterPage)Master).u = (User)Session["user"];
-            user = new UserModel().getByUserName(Request.Cookies["user"].Value);
+            user = (User)Session["user"];
         }
         try
         {
