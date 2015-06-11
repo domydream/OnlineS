@@ -55,6 +55,7 @@ public partial class FindFriend : System.Web.UI.Page
             con.UserID = user.UserID;    
             new ContactModel().InsertContact(con);
             //Save a request to friend contact with my detail and status =0 :WAIT ACCEPT
+            con = new Contact();
             con.FriendName = user.FullName;
             con.FriendNumber = user.Phone;
             con.Status = 0;

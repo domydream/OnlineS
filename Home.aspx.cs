@@ -29,17 +29,31 @@ public partial class Home : System.Web.UI.Page
             u = (User)Session["user"];
 
             funame.Text = u.FullName;
-            
+         
             try
             {
                 countRequest.Text = new ContactModel().getRequestContact(u.UserID).Rows.Count.ToString();
-                countMessage.Text = new MessageModel().getByUserID(u.UserID.ToString(), u.Phone, true).Rows.Count.ToString();
-                countSMSService.Text = new UserServiceModel().getByUserService(u.UserID.ToString()).Rows[0]["quantity"].ToString();
             }
             catch (Exception)
             {
                 countRequest.Text = "0";
+            }
+            try
+            {
+                countMessage.Text = new MessageModel().getByUserID(u.UserID.ToString(), u.Phone, true).Rows.Count.ToString();
+
+            }
+            catch (Exception)
+            {  
                 countMessage.Text = "0";
+            }
+            try
+            {
+                string sid=new ServicesModel().getServiceID("SMS");
+                countSMSService.Text = new UserServiceModel().getByUserService(u.UserID.ToString(),sid ).Rows[0]["quantity"].ToString();
+            }
+            catch (Exception)
+            { 
                 countSMSService.Text = "0";
             }
 
@@ -66,7 +80,7 @@ public partial class Home : System.Web.UI.Page
             DataTable dt = new DataTable();
 
             da.Fill(dt);
-                            
+
             List<string> Names = new List<string>();
 
             for (int i = 0; i < dt.Rows.Count; i++)

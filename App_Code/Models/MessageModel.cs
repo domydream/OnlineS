@@ -58,6 +58,7 @@ public class MessageModel
         if (inbox)
         {
             condition.Add("ToPhoneNumber", number);
+            condition.Add("status", 0);
         }
         else condition.Add("FromPhoneNumber", number);
         return getMessage(condition); 

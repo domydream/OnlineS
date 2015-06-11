@@ -50,6 +50,7 @@ public partial class _Default : System.Web.UI.Page
                     us.Quantity = 5;
                     us.StartDate = DateTime.Now.ToString();
                     us.ExpirationDate = DateTime.Now.AddDays(30).ToString();
+                    us.State = 1;
                     new UserServiceModel().InsertUserService(us);
                     Response.Redirect("~/MyProfile.aspx");      
                 }

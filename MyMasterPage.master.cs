@@ -18,21 +18,22 @@ public partial class MyMasterPage : System.Web.UI.MasterPage
     {
         lastlogin.Text = u.LastLogin;
         avatar.ImageUrl = u.Image;
-        fullname.Text = u.FullName;   
+        fullname.Text = u.FullName;
         myID.Text = u.UserID.ToString();
         try
         {
+            string sid = new ServicesModel().getServiceID("SMS");
             countRequest.Text = new ContactModel().getRequestContact(u.UserID).Rows.Count.ToString();
-            smsremain.Text = "You have " + new UserServiceModel().getByUserService(u.UserID.ToString()).Rows[0]["quantity"].ToString() + " free sms remain";
-            friendNumber.Enabled = true;                 
+            smsremain.Text = "You have " + new UserServiceModel().getByUserService(u.UserID.ToString(), sid).Rows[0]["quantity"].ToString() + " free sms remain";
+            friendNumber.Enabled = true;
             content.Enabled = true;
-            sendSMS.Visible = true;                
-        }                                                                 
+            sendSMS.Visible = true;
+        }
         catch (Exception)
-        {   
+        {
             countRequest.Text = "0";
             smsremain.Text = "You can't send a SMS. Go to service to buy more sms";
-            friendNumber.Enabled = false;               
+            friendNumber.Enabled = false;
             content.Enabled = false;
             sendSMS.Visible = false;
         }
@@ -50,46 +51,48 @@ public partial class MyMasterPage : System.Web.UI.MasterPage
         Message m = new Message();
         m.UserID = u.UserID;
         m.FromPhoneNumber = u.Phone;
-        if(friendNumber.Text != "") {
+        if (friendNumber.Text != "")
+        {
             m.ToPhoneNumber = friendNumber.Text;
         }
         else
-        {                                       
+        {
             m.ToPhoneNumber = friendNum.SelectedValue.ToString();
         }
-         
+
         m.Content = content.Text;
         m.Status = 2; //for my outbox pending message
         m.CreateAt = DateTime.Now;
         try
         {
-           //insert message for send contact
-            new MessageModel().InsertMessage(m);     
-           //insert message for receive contact
-            try
-            {
-                m.UserID = new UserModel().getByPhoneNum(m.ToPhoneNumber).UserID;
-                m.Status = 0;  //for friend inbox not view message
-                new MessageModel().InsertMessage(m);
-            }
-            catch (Exception)
-            {
-                info.Text = "Error occur! please check your number phone";
-                info.CssClass = "label-warning";                   
-            }
-            new UserServiceModel().decQuantitySMS(u.UserID.ToString());
-          
-            info.Text = "Your message was sent!";
-            content.Text = "";
-            Response.Redirect(Request.RawUrl);
+            //insert message for send contact
+            new MessageModel().InsertMessage(m);
         }
         catch (Exception)
         {
             info.Text = "Error occur! please check your message";
             info.CssClass = "label-warning";
         }
-      
-       
+        try
+        {
+            m.UserID = new UserModel().getByPhoneNum(m.ToPhoneNumber).UserID;
+            m.Status = 0;  //for friend inbox not view message
+            //insert message for recceive contact
+            new MessageModel().InsertMessage(m);
+            //Decrease number of free SMS service ;
+            new UserServiceModel().decQuantitySMS(u.UserID.ToString());
+            info.Text = "Your message was sent!";
+            content.Text = "";
+            Response.Redirect(Request.RawUrl);
+        }
+        catch (Exception)
+        {
+            info.Text = "Error occur! please check your number phone";
+            info.CssClass = "label-warning";
+        }
+
+
+
     }
     [System.Web.Script.Services.ScriptMethod()]
     [System.Web.Services.WebMethod]

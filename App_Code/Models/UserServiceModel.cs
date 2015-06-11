@@ -55,11 +55,11 @@ public class UserServiceModel
         return getUserServiceCustom(Columns, null);
     }
 
-    public DataTable getByUserService(string userID)
-    {
+    public DataTable getByUserService(string userID,string ServiceID)
+    {          
         Dictionary<String, Object> condition = new Dictionary<String, Object>();
         condition.Add("UserID", userID);
-        condition.Add("ServiceID", "1002");
+        condition.Add("ServiceID", ServiceID);
         return getUserService(condition);
     }
 

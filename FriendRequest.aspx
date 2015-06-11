@@ -10,13 +10,16 @@
     <h2>Pendding Request:</h2>
     <asp:ListView ID="ListView1" runat="server" DataKeyNames="ContactID" DataSourceID="SqlDataSource1">
         <AlternatingItemTemplate>
-            FriendName:
-            <asp:Label ID="FriendNameLabel" runat="server" Text='<%# Eval("FriendName") %>' />
-            <br />
-            FriendNumber:
-            <asp:Label ID="FriendNumberLabel" runat="server" Text='<%# Eval("FriendNumber") %>' />
-            <br />
-            <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
+           <div style="background-color: #5cb85c; margin: 10px; padding: 10px; border-radius: 8px; max-width: 50%;">
+                <div style="color: white">
+                    Waitting for accept :
+                    <asp:Label ID="FriendNameLabel" runat="server" Text='<%# Eval("FriendName") %>' />
+                    <br />
+                    Friend Number:
+                     <asp:Label ID="FriendNumberLabel" runat="server" Text='<%# Eval("FriendNumber") %>' />
+                </div>
+            </div>
+
             <br />
             <br />
         </AlternatingItemTemplate>
@@ -28,14 +31,13 @@
         <InsertItemTemplate>
         </InsertItemTemplate>
         <ItemTemplate>
-            <div style="background-color: #5cb85c; margin: 10px; padding: 10px; border-radius: 8px; max-width: 60%;">
+            <div style="background-color: #5cb85c; margin: 10px; padding: 10px; border-radius: 8px; max-width: 50%;">
                 <div style="color: white">
-
-
+                    Waitting for accept :
                     <asp:Label ID="FriendNameLabel" runat="server" Text='<%# Eval("FriendName") %>' />
                     <br />
-                    FriendNumber:
-            <asp:Label ID="FriendNumberLabel" runat="server" Text='<%# Eval("FriendNumber") %>' />
+                    Friend Number:
+                     <asp:Label ID="FriendNumberLabel" runat="server" Text='<%# Eval("FriendNumber") %>' />
                 </div>
             </div>
 
@@ -86,34 +88,50 @@
 
     <asp:ListView ID="ListView2" runat="server" DataKeyNames="ContactID,Expr1" DataSourceID="SqlDataSource2">
         <AlternatingItemTemplate>
-            FriendName:
-            <asp:Label ID="FriendNameLabel" runat="server" Text='<%# Eval("FriendName") %>' />
-            <br />
-            FriendNumber:
-            <asp:Label ID="FriendNumberLabel" runat="server" Text='<%# Eval("FriendNumber") %>' />
-            <br />
-            <asp:Button ID="UpdateButton" runat="server" CommandName="Accept" Text="Update" />
-            <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
+            <div style="background-color: #69dd96; color: white; padding: 10px; border-top-left-radius: 20px; border-bottom-right-radius: 20px; width: 50%; min-height: 50px;">
+                <div style="float: left; margin: 5px auto; width: 60%;">
+                    From
+                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("FriendName") %>' />
+                    <br />
+                    Phone Number:
+                    <asp:Label ID="Label2" runat="server" Text='<%# Eval("FriendNumber") %>' />
+                    <br />
+                </div>
+                <div style="float: right; margin: 5px auto;">
+                    <asp:LinkButton ID="UpdateButton" CssClass="btn btn-success" runat="server" CommandName="Update"><i class="fa fa-user-plus"></i> Accept</asp:LinkButton>
+                    <asp:LinkButton ID="DeleteButton" CssClass="btn btn-danger" runat="server" CommandName="Delete"> <i class="fa fa-trash"></i> Cancel</asp:LinkButton>
+                </div>
+                <div style="clear: both"></div>
+            </div>
             <br />
             <br />
         </AlternatingItemTemplate>
         <EditItemTemplate>
         </EditItemTemplate>
         <EmptyDataTemplate>
-            <span>No data was returned.</span>
+            <span>No friend request.</span>
         </EmptyDataTemplate>
         <InsertItemTemplate>
         </InsertItemTemplate>
         <ItemTemplate>
-            FriendName:
-            <asp:Label ID="FriendNameLabel" runat="server" Text='<%# Eval("FriendName") %>' />
-            <br />
-            FriendNumber:
-            <asp:Label ID="FriendNumberLabel" runat="server" Text='<%# Eval("FriendNumber") %>' />
-            <br />
+            <div style="background-color: #67c78c; color: white; padding: 10px; border-top-left-radius: 20px; border-bottom-right-radius: 20px; width: 50%; min-height: 50px;">
+                <div style="float: left; margin: 5px auto; width: 60%;">
+                    From
+                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("FriendName") %>' />
+                    <br />
+                    Phone Number:
+                    <asp:Label ID="Label2" runat="server" Text='<%# Eval("FriendNumber") %>' />
+                    <br />
+                </div>
+                <div style="float: right; margin: 5px auto;">
+                    <asp:LinkButton ID="UpdateButton" CssClass="btn btn-success" runat="server" CommandName="Update"><i class="fa fa-user-plus"></i> Accept</asp:LinkButton>
+                    <asp:LinkButton ID="DeleteButton" CssClass="btn btn-danger" runat="server" CommandName="Delete"> <i class="fa fa-trash"></i> Cancel</asp:LinkButton>
+                </div>
+                <div style="clear: both"></div>
+            </div>
 
-            <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Accept" />
-            <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
+
+
             <br />
             <br />
         </ItemTemplate>
