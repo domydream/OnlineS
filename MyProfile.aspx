@@ -16,7 +16,7 @@
                     <div class="portlet light profile-sidebar-portlet">
                         <!-- SIDEBAR USERPIC -->
                         <div class="profile-userpic">
-                            <asp:Image ID="Image1" CssClass="img-responsive img-circle" runat="server" />
+                            <asp:Image ID="Image1" CssClass="img-responsive img-circle" Width="170px" Height="170px" runat="server" />
                         </div>
                         <!-- END SIDEBAR USERPIC -->
                         <!-- SIDEBAR USER TITLE -->
