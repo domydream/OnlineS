@@ -152,9 +152,10 @@
         <SelectedItemTemplate>
         </SelectedItemTemplate>
     </asp:ListView>
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineSMSConnectionString %>" DeleteCommand="DELETE FROM [Contact] WHERE [ContactID] = @ContactID" SelectCommand="SELECT Contact.ContactID, Contact.userID, Contact.FriendName, Contact.FriendNumber, Contact.Status, [User].userID AS Expr1 FROM Contact INNER JOIN [User] ON Contact.FriendNumber = [User].phone WHERE (Contact.userID = @userID) AND (Contact.Status = @Status)" UpdateCommand=" UPDATE [Contact] SET status = CASE userID   WHEN @Expr1 THEN '1'  WHEN @myID THEN '1'  END WHERE userID IN (@Expr1, @myID) " InsertCommand="INSERT INTO [Contact] ([userID], [FriendName], [FriendNumber], [Status]) VALUES (@userID, @FriendName, @FriendNumber, @Status)">
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineSMSConnectionString %>" DeleteCommand="DELETE FROM [Contact] WHERE AND( ([ContactID] = @ContactID) OR ([FriendNumber]=@FriendNumber AND Status=2))" SelectCommand="SELECT Contact.ContactID, Contact.userID, Contact.FriendName, Contact.FriendNumber, Contact.Status, [User].userID AS Expr1 FROM Contact INNER JOIN [User] ON Contact.FriendNumber = [User].phone WHERE (Contact.userID = @userID) AND (Contact.Status = @Status)" UpdateCommand=" UPDATE [Contact] SET status = CASE userID   WHEN @Expr1 THEN '1'  WHEN @myID THEN '1'  END WHERE userID IN (@Expr1, @myID) " InsertCommand="INSERT INTO [Contact] ([userID], [FriendName], [FriendNumber], [Status]) VALUES (@userID, @FriendName, @FriendNumber, @Status)">
         <DeleteParameters>
             <asp:Parameter Name="ContactID" Type="Int32" />
+            <asp:Parameter Name="FriendNumber" Type="String" />
         </DeleteParameters>
         <InsertParameters>
             <asp:Parameter Name="userID" Type="Int32" />

@@ -21,6 +21,13 @@ public partial class ServicesControl : System.Web.UI.Page
                 Session["user"] = new UserModel().getByUserName(Request.Cookies["user"].Value);
             }
             ((MyMasterPage)Master).u = (User)Session["user"];
+            if (Session["checkService"] == null || !(bool)Session["checkService"])
+            {
+                if (!((User)Session["user"]).UserName.Equals("admin"))
+                {
+                    Response.Redirect("~/Services.aspx");
+                }
+            }
 
         }
     }

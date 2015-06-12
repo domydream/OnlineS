@@ -169,6 +169,9 @@ public partial class MyProfile : System.Web.UI.Page
             command.ExecuteNonQuery();
             command.CommandText = "DELETE FROM [contact] WHERE UserID= " + u.UserID.ToString();
             command.ExecuteNonQuery();
+            //delete request from my contact
+            command.CommandText = "DELETE FROM [contact] WHERE (FriendNumber= " + u.Phone + " AND Status = 0)";
+            command.ExecuteNonQuery();
             command.CommandText = "DELETE FROM [UserProfile] WHERE UserID= " + u.UserID.ToString();
             command.ExecuteNonQuery();
             command.CommandText = "DELETE FROM [user] WHERE UserID= " + u.UserID.ToString();

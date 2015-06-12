@@ -144,7 +144,7 @@
                                 <div class="form-group">
                                     <label>Friend</label>
                                     <asp:DropDownList CssClass="form-control" runat="server" ID="friendNum" DataSourceID="SqlDataSource1" DataTextField="FriendName" DataValueField="FriendNumber"></asp:DropDownList>
-                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineSMSConnectionString %>" SelectCommand="SELECT * FROM [Contact] WHERE ([userID] = @userID)">
+                                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:OnlineSMSConnectionString %>" SelectCommand="SELECT * FROM [Contact] WHERE ([userID] = @userID AND status=1)">
                                         <SelectParameters>
                                             <asp:ControlParameter ControlID="myID" Name="userID" PropertyName="Text" Type="Int32" />
                                         </SelectParameters>
