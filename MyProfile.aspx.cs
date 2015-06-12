@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -88,9 +89,9 @@ public partial class MyProfile : System.Web.UI.Page
         {
             if (flupImage.HasFile)
             {
-                string fileURL= u.Image;
+                string fileURL = u.Image;
                 if (File.Exists(@fileURL))
-                File.Delete(@fileURL);         
+                    File.Delete(@fileURL);
                 u.Image = "Images/" + flupImage.PostedFile.FileName;
                 new UserModel().UpdateUser(u);
                 flupImage.PostedFile.SaveAs(Server.MapPath("~/Images/") + flupImage.PostedFile.FileName);
@@ -142,8 +143,8 @@ public partial class MyProfile : System.Web.UI.Page
             up.Qualification = txtQualification.Text;
             up.School = txtSchool.Text;
             up.Sport = txtSport.Text;
-            up.WorkStatus = txtWork.Text; 
-      
+            up.WorkStatus = txtWork.Text;
+
             new UserProfileModel().UpdateUserProfile(up);
             new UserModel().UpdateUser(u);
             Session["user"] = u;
@@ -152,18 +153,43 @@ public partial class MyProfile : System.Web.UI.Page
     }
     protected void deactive_Click(object sender, EventArgs e)
     {
+
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["OnlineSMS"].ConnectionString);
+        con.Open();
+        SqlCommand command = con.CreateCommand();
+        SqlTransaction transaction;
+        transaction = con.BeginTransaction("DeleteUserTransaction");
+        command.Connection = con;
+        command.Transaction = transaction;
         try
         {
-            BaseConnect sql = new BaseConnect(ConfigurationManager.ConnectionStrings["OnlineSMS"].ConnectionString);
-            sql.executeNonQuery("DELETE FROM SmsData WHERE UserID=" + u.UserID.ToString(),null,null);
-            sql.executeNonQuery("DELETE FROM contact WHERE UserID= " + u.UserID.ToString(), null, null);
-            sql.executeNonQuery("DELETE FROM userservice WHERE UserID= " + u.UserID.ToString(), null, null);
-            sql.executeNonQuery("DELETE FROM user WHERE UserID= " + u.UserID.ToString(), null, null);
+            command.CommandText = "DELETE FROM [SmsData] WHERE UserID=" + u.UserID.ToString();
+            command.ExecuteNonQuery();
+            command.CommandText = "DELETE FROM [userservice] WHERE UserID= " + u.UserID.ToString();
+            command.ExecuteNonQuery();
+            command.CommandText = "DELETE FROM [contact] WHERE UserID= " + u.UserID.ToString();
+            command.ExecuteNonQuery();
+            command.CommandText = "DELETE FROM [UserProfile] WHERE UserID= " + u.UserID.ToString();
+            command.ExecuteNonQuery();
+            command.CommandText = "DELETE FROM [user] WHERE UserID= " + u.UserID.ToString();
+            command.ExecuteNonQuery();
+
+            transaction.Commit();
             Response.Redirect("~/Default.aspx");
         }
         catch (Exception)
         {
-            returndelete.Text = "Having error occur";
+            returndelete.Text = "Having error when delete";
+            try
+            {
+                transaction.Rollback();
+            }
+            catch (Exception)
+            { 
+                returndelete.Text = "Having error when rollback";
+            }
         }
+
+
     }
 }

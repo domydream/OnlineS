@@ -23,7 +23,11 @@ public partial class MyService : System.Web.UI.Page
                 Session["user"] = new UserModel().getByUserName(Request.Cookies["user"].Value);
             }
             ((MyMasterPage)Master).u = (User)Session["user"];
-            userID.Text = ((User)Session["user"]).UserID.ToString();            
+            userID.Text = ((User)Session["user"]).UserID.ToString();
+            if (Session["checkService"] == null || !(bool)Session["checkService"])
+            {
+                Response.Redirect("~/Services.aspx");                    
+            }
         }
     }
     protected void btnregister_Click(object sender, EventArgs e)

@@ -6,16 +6,12 @@
     <div class="row page-content-wrap">
     <h2>Please login to continue</h2>
        <p>
-            For security purpose, you must login to continue with your services
+            For security purpose, you must re-login to continue with your services
        </p>
     <hr />
-        <div class="col-md-4">
+        <div class="col-md-4">              
             <div class="form-group">
-                <label>Username</label>
-                <asp:TextBox runat="server" ID="uname" CssClass="form-control"></asp:TextBox>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
+                <label>Enter your Password</label>
                 <asp:TextBox runat="server" TextMode="Password" ID="pass" CssClass="form-control"></asp:TextBox>
             </div>
             <div>

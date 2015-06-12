@@ -22,11 +22,14 @@
                     <i class="fa fa-envelope-o"></i>
                 </span>
                 <div class="text-box">
-                    <p class="main-text">
-                        <asp:Label runat="server" ID="countMessage"> </asp:Label>
-                        News
-                    </p>
-                    <p class="text-muted">SMS</p>
+
+                    <asp:HyperLink runat="server" NavigateUrl="~/Inbox.aspx">
+                        <p class="main-text">
+                            <asp:Label runat="server" ID="countMessage"> </asp:Label>
+                            News
+                        </p>
+                        <p class="text-muted">SMS</p>
+                    </asp:HyperLink>
                 </div>
             </div>
         </div>
@@ -36,11 +39,13 @@
                     <i class="fa fa-bars"></i>
                 </span>
                 <div class="text-box">
-                    <p class="main-text">
-                        <asp:Label ID="countSMSService" runat="server"></asp:Label>
-                        Free SMS
-                    </p>
-                    <p class="text-muted">Remaining</p>
+                    <asp:HyperLink runat="server" NavigateUrl="~/Services.aspx">   
+                        <p class="main-text">
+                            <asp:Label ID="countSMSService" runat="server"></asp:Label>
+                            Free SMS
+                        </p>
+                        <p class="text-muted">Remaining</p>
+                    </asp:HyperLink>
                 </div>
             </div>
         </div>
@@ -50,39 +55,50 @@
                     <i class="fa fa-users"></i>
                 </span>
                 <div class="text-box">
-                    <p class="main-text">
-                        <asp:Label ID="countRequest" runat="server" />
-                        Friend
-                    </p>
-                    <p class="text-muted">Request</p>
+                    <asp:HyperLink runat="server" NavigateUrl="~/FriendRequest.aspx">      
+                        <p class="main-text">
+                            <asp:Label ID="countRequest" runat="server" />
+                            Friend
+                        </p>
+                        <p class="text-muted">Request</p>
+                    </asp:HyperLink>
                 </div>
             </div>
         </div>
         <!-- /. ROW  -->
         <hr />
-        <div class="row">
+        <hr />
+
+        <div class="row" style="margin: 15px auto;">
+
             <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="panel panel-back noti-box">
-                    <span class="icon-box bg-color-blue">
-                        <i class="fa fa-warning"></i>
-                    </span>
-                    <div class="text-box">
-                        <p class="main-text">52 Important Issues to Fix </p>
-                        <p class="text-muted">Please fix these issues to work smooth</p>
-                        <p class="text-muted">Time Left: 30 mins</p>
-                        <hr />
-                        <p class="text-muted">
-                            <span class="text-muted color-bottom-txt"><i class="fa fa-edit"></i>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn. 
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit gthn. 
-                            </span>
-                        </p>
-                    </div>
+                <h2>BREAKING NEWS</h2>
+                <div style="width: 100%; align=center; margin: 20px auto; padding: 20px; border-radius: 18px;">
+                    <script language='javascript' type='text/javascript'>
+                        var keyword = 'computer, microsoft , windows, technology, mobile, smartphone, science ';
+                        var type = 'HID';
+                        var height = 450;
+                        var width = 'Auto';
+                        var border = 0;
+                        var bordercolor = '#000000';
+                        var textcolor = '#000000';
+                        var backgroundcolor = '#ebe9e9';
+                        var linkcolor = 'red';
+                        var scroll = 1;
+                        var scrollspeed = 1;
+                        var fontfamily = 'Arial, Helvetica, sans-serif';
+                        var fontsize = 12;
+                        var rhost = document.URL;
+                        var v = 1.0;
+                    </script>
+                    <script language='javascript' src='http://www.widgetmate.com/news/js/showNews.js' type='text/javascript'> </script>
                 </div>
+
             </div>
-            <div class="col-md-6 col-sm-12 col-xs-12 "> 
+            <div class="col-md-6 col-sm-12 col-xs-12 ">
+                <h2>WEATHER FORECAST</h2>
                 <a href="http://www.accuweather.com/en/us/new-york-ny/10007/current-weather/349727" class="aw-widget-legal"></a>
-                <div id="awtd1434002949071" class="aw-widget-36hour" data-locationkey="" data-unit="c" data-language="en-us" data-useip="true" data-uid="awtd1434002949071" data-editlocation="true"></div>
+                <div id="awtd1434002949071" style="margin: 20px auto; padding: 20px;" class="aw-widget-current" data-locationkey="" data-unit="c" data-language="en-us" data-useip="true" data-uid="awtd1434002949071" data-editlocation="true"></div>
 
             </div>
         </div>

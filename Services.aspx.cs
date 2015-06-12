@@ -25,8 +25,11 @@ public partial class Services : System.Web.UI.Page
     }
     protected void submit_Click(object sender, EventArgs e)
     {
-        if (new UserModel().Login(uname.Text, pass.Text) ) { 
-            if( uname.Text.Equals("admin")){
+        if (new UserModel().Login(((User)Session["user"]).UserName, pass.Text))
+        {
+            Session["checkService"] = true;
+            if (((User)Session["user"]).UserName.Equals("admin"))
+            {
                 Response.Redirect("~/ServicesControl.aspx");
             }
             else
