@@ -1,38 +1,43 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MyMasterPage.master" AutoEventWireup="true" CodeFile="ServicesControl.aspx.cs" Inherits="ServicesControl" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div>
+        <asp:Label runat="server" ID="error"></asp:Label>
         <asp:HyperLink runat="server" NavigateUrl="~/MyService.aspx">Go to my service</asp:HyperLink>
         <h2>Add new Service</h2>
         <div class="col-md-5">
             <div class="form-group">
                 <label>Name service</label>
                 <asp:TextBox runat="server" ID="txtName" CssClass="form-control"></asp:TextBox>
+                <asp:RequiredFieldValidator ControlToValidate="txtName" ValidationGroup="service" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Name of service is require!"></asp:RequiredFieldValidator>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label>content</label>
                 <asp:TextBox TextMode="MultiLine" runat="server" ID="txtContent" CssClass="form-control"></asp:TextBox>
+                <asp:RequiredFieldValidator ControlToValidate="txtContent" ValidationGroup="service" ID="RequiredFieldValidator2" runat="server" ErrorMessage="Contents is require!"></asp:RequiredFieldValidator>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label>Price</label>
                 <asp:TextBox runat="server" ID="txtprice" CssClass="form-control"></asp:TextBox>
+                <asp:RequiredFieldValidator ControlToValidate="txtprice" ValidationGroup="service" ID="RequiredFieldValidator3" runat="server" ErrorMessage="Price is require!"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ControlToValidate="txtprice" ValidationGroup="service" ValidationExpression="\d+" ID="RegularExpressionValidator1" runat="server" ErrorMessage="Price is numberic value!"></asp:RegularExpressionValidator>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label>State</label>
                 <asp:DropDownList CssClass="form-control" runat="server" ID="txtState">
                     <asp:ListItem Value="0" Text="Unavailable"></asp:ListItem>
                     <asp:ListItem Value="1" Text="Available" Selected="True"></asp:ListItem>
                 </asp:DropDownList>
             </div>
-             <div class="form-group">
-               <asp:LinkButton runat="server" ID="create" OnClick="create_Click" CssClass="btn btn-success"> <i class="fa fa-plus"></i> Add new</asp:LinkButton>
+            <div class="form-group">
+                <asp:LinkButton ValidationGroup="service" runat="server" ID="create" OnClick="create_Click" CssClass="btn btn-success"> <i class="fa fa-plus"></i> Add new</asp:LinkButton>
             </div>
         </div>
     </div>
     <div>
-        
+
         <asp:GridView runat="server" CssClass="table table-responsive table-hover" ID="servicelist" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="ServiceID" DataSourceID="SqlDataSource1">
             <Columns>
                 <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
@@ -45,8 +50,8 @@
                         &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"><i class="fa fa-backward"></i></asp:LinkButton>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" ><i class="fa fa-edit"></i> Edit</asp:LinkButton>
-                       <%-- &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>--%>
+                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit"><i class="fa fa-edit"></i> Edit</asp:LinkButton>
+                        <%-- &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>--%>
                         &nbsp;<asp:LinkButton ID="LinkButton3" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('Are you sure to delete service?')" Text="Delete"><i class="fa fa-trash"></i></asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>

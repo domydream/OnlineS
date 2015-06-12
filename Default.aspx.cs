@@ -13,7 +13,20 @@ public partial class _Default : System.Web.UI.Page
     UserModel um = new UserModel();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        // code only run for the first time. sms service must always available 
+        try
+        {
+            new ServicesModel().getServiceID("SMS");
+        }
+        catch (Exception)
+        {
+         Service s = new Service();
+        s.Name = "SMS";
+        s.Contents ="Send sms to friend";
+        s.Price = 5;
+        s.State =1;
+        new ServicesModel().InsertServices(s);
+        }
     }
     protected void btnRegister_Click(object sender, EventArgs e)
     {

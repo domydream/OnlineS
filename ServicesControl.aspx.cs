@@ -26,12 +26,20 @@ public partial class ServicesControl : System.Web.UI.Page
     }
     protected void create_Click(object sender, EventArgs e)
     {
-        Service s = new Service();
-        s.Name = txtName.Text;
-        s.Contents = txtContent.Text;
-        s.Price = float.Parse(txtprice.Text);
-        s.State =int.Parse(txtState.SelectedValue);
-        new ServicesModel().InsertServices(s);
-        Response.Redirect(Request.RawUrl);
+        try
+        {
+            Service s = new Service();
+            s.Name = txtName.Text;
+            s.Contents = txtContent.Text;
+            s.Price = float.Parse(txtprice.Text);
+            s.State = int.Parse(txtState.SelectedValue);
+            new ServicesModel().InsertServices(s);
+            Response.Redirect(Request.RawUrl);
+        }
+        catch (Exception)
+        {   
+            error.Text = "Services is exists! Please create another";
+        }
+      
     }
 }
